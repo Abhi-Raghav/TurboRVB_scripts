@@ -19,8 +19,6 @@ parser.add_argument("-j", "--jobtype", type=str, choices=["scale", "plot"], help
 args = parser.parse_args()
 logging.info(args)
 
-shutil.copy(args.wfs, "fort.10_sp0")
-
 fort10_unit = IO_fort10(args.wfu)
 fort10_super = IO_fort10(args.wfs, in_place=True)
 jobtype = args.jobtype
@@ -100,7 +98,6 @@ def plot_jas_matrix(fort10_unit, fort10_super):
 if jobtype == "scale":
     # First copy the fort10_sp for the supercell to fort.10_sp0. Keep the original files unchanged
     logging.info(f'Jastrow matrix from {args.wfu} will be scaled to {args.wfs} !')
-    logging.info(f'Original WF file for supercell is saved as fort.10_sp0')
     scale_jas_matrix(fort10_unit, fort10_super)
     logging.info('Job done !')
 else:
